@@ -1,0 +1,820 @@
+/**
+ * Global Stylesheet
+ * Mount Kigali University - AI Study Planner
+ * 
+ * Clean professional blue and white color scheme
+ * suitable for a university system.
+ */
+
+/* ============ CSS VARIABLES ============ */
+:root {
+    --primary-blue: #1a56db;
+    --primary-dark: #1e3a5f;
+    --primary-light: #3b82f6;
+    --secondary-blue: #60a5fa;
+    --accent-blue: #dbeafe;
+    --white: #ffffff;
+    --light-gray: #f8fafc;
+    --gray: #e2e8f0;
+    --dark-gray: #64748b;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* ============ RESET & BASE STYLES ============ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-blue);
+}
+
+a:hover {
+    color: var(--primary-light);
+}
+
+/* ============ UTILITY CLASSES ============ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+
+/* ============ HEADER / NAVIGATION ============ */
+.header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+    color: var(--white);
+    padding: 15px 0;
+    box-shadow: var(--shadow-lg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header .logo .nav-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.header .logo h1 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.header .logo span {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+}
+
+.nav-links .btn-logout {
+    background-color: rgba(239, 68, 68, 0.8);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-links .btn-logout:hover {
+    background-color: var(--danger);
+}
+
+/* ============ AUTH PAGE STYLES ============ */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+    padding: 20px;
+}
+
+.auth-box {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-box .university-brand {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-box .university-brand .university-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.auth-box .university-brand h1 {
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.auth-box .university-brand p {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+}
+
+.auth-box .university-brand .subtitle {
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--gray);
+}
+
+.auth-tabs button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.auth-tabs button.active {
+    color: var(--primary-blue);
+    border-bottom-color: var(--primary-blue);
+}
+
+/* ============ FORM STYLES ============ */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--gray);
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ============ BUTTON STYLES ============ */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+    background-color: var(--gray);
+    color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--dark-gray);
+    color: var(--white);
+}
+
+.btn-success {
+    background-color: var(--success);
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background-color: #059669;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+/* ============ CARD STYLES ============ */
+.card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gray);
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+}
+
+.card-header h3 {
+    font-size: 1rem;
+    color: var(--primary-dark);
+}
+
+/* ============ DASHBOARD STYLES ============ */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-top: 4px solid var(--primary-blue);
+}
+
+.stat-card .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 10px 0;
+}
+
+.stat-card .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============ CALENDAR STYLES ============ */
+.calendar-container {
+    margin-top: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-day-header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    padding: 10px 5px;
+    background-color: var(--accent-blue);
+    border-radius: 4px;
+}
+
+.calendar-day {
+    background: var(--white);
+    border: 1px solid var(--gray);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    min-height: 100px;
+    transition: var(--transition);
+}
+
+.calendar-day:hover {
+    border-color: var(--primary-blue);
+    box-shadow: var(--shadow);
+}
+
+.calendar-day .day-number {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.calendar-day .day-sessions {
+    font-size: 0.75rem;
+    color: var(--text-medium);
+}
+
+.calendar-day .session-item {
+    background-color: var(--accent-blue);
+    padding: 3px 6px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    font-size: 0.7rem;
+    color: var(--primary-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.calendar-day.today {
+    border-color: var(--primary-blue);
+    background-color: #f0f7ff;
+}
+
+/* ============ REMINDER STYLES ============ */
+.reminder-card {
+    background: linear-gradient(135deg, #fff7ed, #ffedd5);
+    border-left: 4px solid var(--warning);
+    padding: 16px;
+    border-radius: var(--border-radius);
+    margin-bottom: 12px;
+}
+
+.reminder-card .reminder-title {
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.reminder-card .reminder-date {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+}
+
+.reminder-card .reminder-days {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--danger);
+}
+
+/* ============ STUDY PLAN STYLES ============ */
+.plan-day {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.plan-day-header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+    color: var(--white);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-day-header .day-title {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.plan-day-header .day-hours {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.plan-session {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-session:last-child {
+    border-bottom: none;
+}
+
+.plan-session .session-info {
+    flex: 1;
+}
+
+.plan-session .session-info .course-name {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+}
+
+.plan-session .session-info .session-topic {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+}
+
+.plan-session .session-meta {
+    text-align: right;
+}
+
+.plan-session .session-meta .duration {
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+
+.plan-session .session-meta .priority {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+/* ============ PROGRESS STYLES ============ */
+.progress-bar-container {
+    background-color: var(--gray);
+    border-radius: 20px;
+    height: 12px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+    transition: width 0.5s ease;
+}
+
+.progress-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray);
+}
+
+.progress-item:last-child {
+    border-bottom: none;
+}
+
+/* ============ TABLE STYLES ============ */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+table th,
+table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray);
+}
+
+table th {
+    background-color: var(--accent-blue);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+table tr:hover {
+    background-color: var(--light-gray);
+}
+
+/* ============ ALERT / MESSAGE STYLES ============ */
+.alert {
+    padding: 14px 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.alert-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.alert-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}
+
+.alert-info {
+    background-color: var(--accent-blue);
+    color: var(--primary-dark);
+    border: 1px solid var(--secondary-blue);
+}
+
+/* ============ MODAL STYLES ============ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal h2 {
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+}
+
+/* ============ PAGE TITLE ============ */
+.page-title {
+    margin: 30px 0 20px;
+}
+
+.page-title h2 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 5px;
+}
+
+.page-title p {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+}
+
+/* ============ EMPTY STATE ============ */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-medium);
+}
+
+.empty-state h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.empty-state p {
+    margin-bottom: 20px;
+}
+
+/* ============ LOADING SPINNER ============ */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--gray);
+    border-top-color: var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============ BADGE STYLES ============ */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-primary {
+    background-color: var(--accent-blue);
+    color: var(--primary-dark);
+}
+
+.badge-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+    }
+
+    .calendar-day {
+        min-height: 60px;
+        padding: 6px;
+    }
+
+    .auth-box {
+        padding: 25px;
+    }
+
+    .plan-session {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .plan-session .session-meta {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-day-header {
+        font-size: 0.7rem;
+        padding: 6px 2px;
+    }
+
+    .nav-links a {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}

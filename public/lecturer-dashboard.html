@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKU AI Study Planner - Lecturer Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 
+        Lecturer Dashboard Page
+        Mount Kigali University - AI Study Planner
+        
+        HOW STUDENT-LECTURER LINKING WORKS:
+        1. Lecturer creates courses with course codes (e.g., CSC 4101)
+        2. Students register courses with the SAME course codes in their profile
+        3. System AUTOMATICALLY links them by matching course codes
+        4. Lecturer sees all students who have their course codes
+        No manual assignment needed!
+    -->
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/MKUR-logo.png" alt="MKU Logo" class="nav-logo">
+                <div>
+                    <h1>MKU Lecturer Panel</h1>
+                    <span>Mount Kigali University</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="lecturer-dashboard.html" class="active">Dashboard</a>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h2 id="welcomeMessage">Lecturer Dashboard</h2>
+            <p>Manage your courses, view enrolled students, and monitor their study progress.</p>
+        </div>
+
+        <!-- Alert Message Area -->
+        <div id="alertMessage" class="hidden"></div>
+
+        <!-- Statistics Cards -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-label">My Courses</div>
+                <div class="stat-number" id="totalCourses">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Enrolled Students</div>
+                <div class="stat-number" id="totalStudents">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Progress Entries</div>
+                <div class="stat-number" id="totalProgress">0</div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="card mt-3">
+            <div class="auth-tabs">
+                <button class="active" id="tabCourses" onclick="showSection('courses')">My Courses</button>
+                <button id="tabStudents" onclick="showSection('students')">My Students</button>
+                <button id="tabProgress" onclick="showSection('progress')">Student Progress</button>
+                <button id="tabReports" onclick="showSection('reports')">Reports</button>
+            </div>
+
+            <!-- COURSES SECTION -->
+            <div id="sectionCourses">
+                <div class="card-header mt-2">
+                    <h2>My Courses</h2>
+                    <button class="btn btn-primary btn-sm" onclick="showAddCourseForm()">+ Add Course</button>
+                </div>
+
+                <!-- Add Course Form (hidden) -->
+                <div id="addCourseForm" class="hidden" style="background: var(--light-gray); padding: 20px; border-radius: 8px; margin-bottom: 16px;">
+                    <h3 style="margin-bottom: 12px; color: var(--primary-dark);">Add New Course</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 12px;">
+                        Students who register a course with the same <strong>Course Code</strong> will be automatically linked to you.
+                    </p>
+                    <form onsubmit="handleAddCourse(event)">
+                        <div class="dashboard-grid">
+                            <div class="form-group">
+                                <label>Course Name</label>
+                                <input type="text" id="courseName" placeholder="e.g., Artificial Intelligence" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Course Code (used to link students)</label>
+                                <input type="text" id="courseCode" placeholder="e.g., CSC 4101" required style="text-transform: uppercase;">
+                            </div>
+                            <div class="form-group">
+                                <label>Credit Hours</label>
+                                <select id="creditHours" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Difficulty Level</label>
+                                <select id="difficultyLevel" required>
+                                    <option value="1">1 - Very Easy</option>
+                                    <option value="2">2 - Easy</option>
+                                    <option value="3" selected>3 - Medium</option>
+                                    <option value="4">4 - Hard</option>
+                                    <option value="5">5 - Very Hard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Exam Date</label>
+                                <input type="date" id="examDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Instructor Name</label>
+                                <input type="text" id="instructor" placeholder="Your name">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm">Save Course</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="hideAddCourseForm()">Cancel</button>
+                    </form>
+                </div>
+
+                <!-- Courses Table -->
+                <div id="coursesContainer">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+
+            <!-- STUDENTS SECTION (Auto-linked by course code) -->
+            <div id="sectionStudents" class="hidden">
+                <div class="card-header mt-2">
+                    <h2>My Students</h2>
+                </div>
+                <div id="studentsContainer">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+
+            <!-- PROGRESS SECTION -->
+            <div id="sectionProgress" class="hidden">
+                <div class="card-header mt-2">
+                    <h2>Student Progress</h2>
+                </div>
+                <div id="progressContainer">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+
+            <!-- REPORTS SECTION -->
+            <div id="sectionReports" class="hidden">
+                <div class="card-header mt-2">
+                    <h2>Reports</h2>
+                </div>
+                <p style="color: var(--text-medium); margin-bottom: 16px;">
+                    Generate a PDF report of your courses, enrolled students, and their study progress.
+                </p>
+                <button class="btn btn-primary" onclick="downloadPDFReport()">
+                    Download My Report (PDF)
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/lecturer.js"></script>
+</body>
+</html>

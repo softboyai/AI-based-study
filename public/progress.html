@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKU AI Study Planner - Progress Tracking</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 
+        Progress Tracking Page
+        Mount Kigali University - AI Study Planner
+        Allows students to log study sessions and view their progress statistics.
+    -->
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/MKUR-logo.png" alt="MKU Logo" class="nav-logo">
+                <div>
+                    <h1>MKU Study Planner</h1>
+                    <span>Mount Kigali University</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="profile.html">Profile</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="studyplan.html">Study Plan</a>
+                <a href="progress.html" class="active">Progress</a>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h2>Progress Tracking</h2>
+            <p>Log your study sessions and track your academic progress over time.</p>
+        </div>
+
+        <!-- Alert Message Area -->
+        <div id="alertMessage" class="hidden"></div>
+
+        <!-- Overall Statistics -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Hours Studied</div>
+                <div class="stat-number" id="totalHours">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Sessions Completed</div>
+                <div class="stat-number" id="totalSessions">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Completion Rate</div>
+                <div class="stat-number" id="completionRate">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg Understanding</div>
+                <div class="stat-number" id="avgUnderstanding">0</div>
+                <div class="stat-label">/ 5</div>
+            </div>
+        </div>
+
+        <!-- Log New Session -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2>Log Study Session</h2>
+            </div>
+            <form id="logProgressForm" onsubmit="handleLogProgress(event)">
+                <div class="dashboard-grid">
+                    <div class="form-group">
+                        <label for="progressCourse">Course</label>
+                        <select id="progressCourse" required>
+                            <option value="">Select Course</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="progressDate">Date</label>
+                        <input type="date" id="progressDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="progressHours">Hours Studied</label>
+                        <input type="number" id="progressHours" placeholder="e.g., 2" min="0.5" max="12" step="0.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="progressUnderstanding">Understanding Level</label>
+                        <select id="progressUnderstanding" required>
+                            <option value="1">1 - Very Low</option>
+                            <option value="2">2 - Low</option>
+                            <option value="3" selected>3 - Medium</option>
+                            <option value="4">4 - Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="progressCompleted">Session Completed?</label>
+                        <select id="progressCompleted">
+                            <option value="true">Yes - Completed</option>
+                            <option value="false">No - Partial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="progressNotes">Notes (Optional)</label>
+                        <input type="text" id="progressNotes" placeholder="What did you study?">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success mt-2">Log Progress</button>
+            </form>
+        </div>
+
+        <!-- Per-Course Progress -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2>Progress by Course</h2>
+            </div>
+            <div id="courseProgressContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2>Recent Study Sessions</h2>
+            </div>
+            <div id="recentProgressContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/progress.js"></script>
+</body>
+</html>

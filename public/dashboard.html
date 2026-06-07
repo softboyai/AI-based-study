@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKU AI Study Planner - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 
+        Dashboard Page with Weekly Study Calendar
+        Mount Kigali University - AI Study Planner
+        Shows overview stats, exam reminders, and weekly calendar view.
+    -->
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/MKUR-logo.png" alt="MKU Logo" class="nav-logo">
+                <div>
+                    <h1>MKU Study Planner</h1>
+                    <span>Mount Kigali University</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="profile.html">Profile</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="studyplan.html">Study Plan</a>
+                <a href="progress.html">Progress</a>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Welcome Section -->
+        <div class="page-title">
+            <h2 id="welcomeMessage">Welcome back!</h2>
+            <p>Here's your study overview for this week.</p>
+        </div>
+
+        <!-- Alert Message Area -->
+        <div id="alertMessage" class="hidden"></div>
+
+        <!-- Exam Reminders Section -->
+        <div id="remindersSection" class="card hidden">
+            <div class="card-header">
+                <h2>⚠️ Exam Reminders</h2>
+                <span class="badge badge-warning" id="reminderCount">0 exams</span>
+            </div>
+            <div id="remindersContainer"></div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Courses</div>
+                <div class="stat-number" id="totalCourses">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Study Hours This Week</div>
+                <div class="stat-number" id="weeklyHours">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Sessions Completed</div>
+                <div class="stat-number" id="completedSessions">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Completion Rate</div>
+                <div class="stat-number" id="completionRate">0%</div>
+            </div>
+        </div>
+
+        <!-- Weekly Calendar Section -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2>Weekly Study Calendar</h2>
+                <button class="btn btn-primary btn-sm" onclick="generatePlan()">Generate New Plan</button>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-grid">
+                    <!-- Day Headers -->
+                    <div class="calendar-day-header">Sun</div>
+                    <div class="calendar-day-header">Mon</div>
+                    <div class="calendar-day-header">Tue</div>
+                    <div class="calendar-day-header">Wed</div>
+                    <div class="calendar-day-header">Thu</div>
+                    <div class="calendar-day-header">Fri</div>
+                    <div class="calendar-day-header">Sat</div>
+                    <!-- Calendar Days (populated by JavaScript) -->
+                </div>
+                <div id="calendarBody" class="calendar-grid mt-1"></div>
+            </div>
+        </div>
+
+        <!-- Today's Plan Quick View -->
+        <div class="card mt-2">
+            <div class="card-header">
+                <h2>Today's Study Sessions</h2>
+            </div>
+            <div id="todayPlan">
+                <div class="empty-state">
+                    <h3>No sessions for today</h3>
+                    <p>Generate a study plan to see your daily schedule.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
