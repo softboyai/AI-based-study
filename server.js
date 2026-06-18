@@ -74,9 +74,9 @@ app.use('/api/lecturer', lecturerRoutes);
 
 // ============ SERVE FRONTEND ============
 
-// Serve the main HTML page for the root route
+// Serve the home page for the root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
 // ============ START SERVER ============

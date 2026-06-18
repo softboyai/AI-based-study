@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKU AI Study Planner - Smart Study, Better Results</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ============ HOME PAGE SPECIFIC STYLES ============ */
+        .home-nav {
+            background: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 0;
+            box-shadow: none;
+        }
+        .home-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .home-nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+        .home-nav .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+        .home-nav .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+        .home-nav .logo span {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+        .home-nav .nav-btns a {
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+        .home-nav .nav-btns .btn-login-nav {
+            border: 2px solid rgba(255,255,255,0.6);
+        }
+        .home-nav .nav-btns .btn-login-nav:hover {
+            background: white;
+            color: var(--primary-dark);
+        }
+        .home-nav .nav-btns .btn-register-nav {
+            background: white;
+            color: var(--primary-dark);
+        }
+        .home-nav .nav-btns .btn-register-nav:hover {
+            background: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 50%, var(--primary-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 .highlight {
+            color: #fbbf24;
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        .hero-content .hero-btns {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-content .hero-btns a {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-get-started {
+            background: #fbbf24;
+            color: var(--primary-dark);
+        }
+        .btn-get-started:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .btn-learn-more {
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-learn-more:hover {
+            background: white;
+            color: var(--primary-dark);
+        }
+        .hero-visual {
+            text-align: center;
+        }
+        .hero-visual .hero-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            text-align: left;
+        }
+        .hero-visual .hero-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .hero-visual .hero-card .sample-session {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--primary-blue);
+        }
+        .hero-visual .hero-card .sample-session .course {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+        .hero-visual .hero-card .sample-session .hours {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 0.85rem;
+        }
+        .hero-visual .hero-card .sample-session .score {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: white;
+        }
+        .features .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .features .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        .features .section-title p {
+            color: var(--text-medium);
+            font-size: 1rem;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--gray);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .feature-card:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(26,86,219,0.1);
+            transform: translateY(-4px);
+        }
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .feature-card p {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 20px;
+            background: var(--light-gray);
+        }
+        .how-it-works .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .how-it-works .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .step-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .step-card .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin: 0 auto 16px;
+        }
+        .step-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+        .step-card p {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+            text-align: center;
+            color: white;
+        }
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        .cta p {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta a {
+            display: inline-block;
+            background: #fbbf24;
+            color: var(--primary-dark);
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .cta a:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        .home-footer {
+            background: var(--text-dark);
+            color: rgba(255,255,255,0.7);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .home-footer p {
+            margin-bottom: 6px;
+        }
+        .home-footer .footer-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-visual {
+                display: none;
+            }
+            .home-nav .nav-btns a {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="home-nav">
+        <div class="container">
+            <div class="logo">
+                <img src="images/MKUR-logo.png" alt="MKU Logo">
+                <div>
+                    <h1>MKU Study Planner</h1>
+                    <span>Mount Kigali University</span>
+                </div>
+            </div>
+            <div class="nav-btns">
+                <a href="index.html" class="btn-login-nav">Login</a>
+                <a href="index.html" class="btn-register-nav">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Study Smarter with <span class="highlight">AI-Powered</span> Planning</h1>
+                <p>
+                    The AI-Based Study Planner System for Mount Kigali University. 
+                    Our intelligent algorithm analyzes your courses, exam dates, and performance 
+                    to create a personalized day-by-day study schedule that maximizes your results.
+                </p>
+                <div class="hero-btns">
+                    <a href="index.html" class="btn-get-started">Get Started Free</a>
+                    <a href="#features" class="btn-learn-more">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <h3>📅 AI-Generated Study Plan</h3>
+                    <div class="sample-session">
+                        <div>
+                            <div class="course">CSC 4101 - Artificial Intelligence</div>
+                            <div class="score">Priority Score: 72.5</div>
+                        </div>
+                        <div class="hours">2.5 hrs</div>
+                    </div>
+                    <div class="sample-session">
+                        <div>
+                            <div class="course">CSC 4102 - Database Admin</div>
+                            <div class="score">Priority Score: 48.3</div>
+                        </div>
+                        <div class="hours">1.5 hrs</div>
+                    </div>
+                    <div class="sample-session">
+                        <div>
+                            <div class="course">CSC 4104 - Networks</div>
+                            <div class="score">Priority Score: 35.1</div>
+                        </div>
+                        <div class="hours">1.0 hrs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Why Use MKU AI Study Planner?</h2>
+            <p>Our AI algorithm does the thinking so you can focus on studying</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">🧠</div>
+                <h3>AI-Powered Scheduling</h3>
+                <p>Our weighted scoring algorithm analyzes 4 factors — exam urgency, previous grades, difficulty, and credit hours — to prioritize your study time intelligently.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Day-by-Day Plan</h3>
+                <p>Get a complete daily schedule from today until your last exam. Each session tells you what to study, for how long, and what to focus on.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⚠️</div>
+                <h3>Exam Reminders</h3>
+                <p>Never be surprised by an exam again. The dashboard alerts you when exams are 7 days or less away with clear countdown timers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📈</div>
+                <h3>Progress Tracking</h3>
+                <p>Log your study sessions, rate your understanding, and watch your progress grow. See completion rates per course and overall statistics.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">👨‍🏫</div>
+                <h3>Lecturer Monitoring</h3>
+                <p>Lecturers can view which students are enrolled in their courses and monitor study progress — all linked automatically by course code.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📄</div>
+                <h3>PDF Reports</h3>
+                <p>Generate professional PDF reports for academic records. Lecturers and admins can download comprehensive progress reports anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Three simple steps to your personalized study plan</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Add Your Courses</h3>
+                <p>Enter your courses with exam dates, difficulty levels, credit hours, and your previous grades.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>AI Generates Your Plan</h3>
+                <p>Click one button and our algorithm scores each subject, then creates an optimized daily schedule.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Study & Track Progress</h3>
+                <p>Follow your personalized plan day by day. Log sessions and watch your preparation improve over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Study Smarter?</h2>
+        <p>Join Mount Kigali University students who are using AI to ace their exams.</p>
+        <a href="index.html">Create Your Account Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+        <p class="footer-brand">Mount Kigali University — AI-Based Study Planner System</p>
+        <p>Final Year Project — School of Computing & Information Technology</p>
+        <p>&copy; 2025 Mount Kigali University. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // If user is already logged in, redirect to their dashboard
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (token && user) {
+            if (user.role === 'admin') window.location.href = 'admin-dashboard.html';
+            else if (user.role === 'lecturer') window.location.href = 'lecturer-dashboard.html';
+            else window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>
