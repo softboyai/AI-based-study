@@ -42,10 +42,16 @@ app.use(express.json());
 // Parse URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
+// ============ SERVE HOME PAGE (before static to override index.html) ============
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
+
 // Serve static files from the 'public' directory (no cache for development)
 app.use(express.static(path.join(__dirname, 'public'), {
     etag: false,
     maxAge: 0,
+    index: false,  // Disable automatic index.html serving
     setHeaders: (res) => {
         res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
         res.setHeader('Pragma', 'no-cache');
@@ -71,13 +77,6 @@ app.use('/api/admin', adminRoutes);
 
 // Lecturer routes (course management, student progress, PDF)
 app.use('/api/lecturer', lecturerRoutes);
-
-// ============ SERVE FRONTEND ============
-
-// Serve the home page for the root route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'home.html'));
-});
 
 // ============ START SERVER ============
 
