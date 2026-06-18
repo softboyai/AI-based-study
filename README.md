@@ -272,5 +272,38 @@ Final Year Undergraduate Project
 Mount Kigali University (MKU)  
 Kigali, Rwanda
 
+## Running on Another Computer
+
+If you want to run this project on a different computer (e.g., during defense or on a supervisor's laptop):
+
+**Prerequisites to install on that computer:**
+1. **Node.js** - Download from https://nodejs.org (click the green button, run installer)
+2. **MongoDB** - Download from https://www.mongodb.com/try/download/community (install with default settings)
+
+**Steps:**
+```bash
+# 1. Copy the project folder to the computer (USB or download from GitHub)
+# 2. Open Command Prompt and navigate to the folder
+cd "AI - Based Study Planner System"
+
+# 3. Install packages (needs internet first time)
+npm install
+
+# 4. Create demo accounts
+npm run seed
+
+# 5. Start the app
+npm start
+
+# 6. Browser opens at http://localhost:3000
+```
+
+**Troubleshooting:**
+- "Port in use" error: Change `PORT=3001` in the `.env` file
+- "MongoDB connection failed": Make sure MongoDB service is running (check Windows Services app)
+- "npm not found": Node.js is not installed properly, reinstall it
+- Browser does not open: Manually go to http://localhost:3000
+- Old data showing: Run `npm run seed` again to reset demo data
+
 ## License
 This project is developed for academic purposes at Mount Kigali University.

@@ -240,32 +240,74 @@ Or copy the project folder to your Desktop
 
 ---
 
-## Slide 14: How to Customize
+## Slide 14: How to Customize Colors
 
-### Change Colors
-Open the file `public/css/style.css` and change these values at the top:
+The entire system uses **CSS variables** in ONE file: `public/css/style.css`
+
+Change the values at the top and EVERYTHING updates (navbar, buttons, cards, titles, links, badges, alerts).
 
 ```css
 :root {
-    --primary-blue: #1a56db;      /* Main blue color */
-    --primary-dark: #1e3a5f;      /* Dark blue (header) */
-    --primary-light: #3b82f6;     /* Light blue (hover) */
+    --primary-blue: #1a56db;       /* Navbar, main buttons, links, stat numbers, progress bar */
+    --primary-dark: #1e3a5f;       /* Navbar gradient, page titles, card headers, plan day headers */
+    --primary-light: #3b82f6;      /* Button hover, active links */
+    --secondary-blue: #60a5fa;     /* Progress bar end gradient */
+    --accent-blue: #dbeafe;        /* Table headers, info boxes, badge backgrounds */
+    --success: #10b981;            /* Save buttons, completed badges, success alerts */
+    --warning: #f59e0b;            /* Exam reminders, partial badges, star ratings */
+    --danger: #ef4444;             /* Delete buttons, logout, error alerts, urgent text */
+    --light-gray: #f8fafc;        /* Page body background */
+    --gray: #e2e8f0;              /* Borders, dividers, input borders */
+    --text-dark: #1e293b;         /* All main text */
+    --text-medium: #475569;       /* Labels, descriptions */
+    --text-light: #94a3b8;        /* Placeholders, hints */
 }
 ```
 
-**To make it green:** Change `#1a56db` to `#10b981`
-**To make it red:** Change `#1a56db` to `#ef4444`
-**To make it purple:** Change `#1a56db` to `#8b5cf6`
+**To make it green:** Replace `--primary-blue: #059669; --primary-dark: #064e3b; --primary-light: #10b981; --secondary-blue: #6ee7b7; --accent-blue: #d1fae5;`
 
-### Change University Name
-Open `public/index.html` and find:
-```html
-<h1>Mount Kigali University</h1>
+**To make it purple:** Replace `--primary-blue: #7c3aed; --primary-dark: #4c1d95; --primary-light: #8b5cf6; --secondary-blue: #c4b5fd; --accent-blue: #ede9fe;`
+
+Steps: Open style.css, change the 5 values, save, refresh browser.
+
+---
+
+## Slide 15: How to Run on Another Computer
+
+**What you need on the new computer:**
+1. Node.js (download from nodejs.org, click the big green button, install)
+2. MongoDB (download from mongodb.com/try/download/community, install)
+
+**Steps to run:**
 ```
-Change it to any name you want.
+Step 1: Copy the project folder to the new computer
+        (or download from GitHub: https://github.com/softboyai/AI-based-study)
 
-### Change Logo
-Replace the file `public/images/MKUR-logo.png` with your own logo (keep the same filename).
+Step 2: Open Command Prompt (cmd) or Terminal
+
+Step 3: Navigate to the project folder
+        cd "AI - Based Study Planner System"
+
+Step 4: Install all packages
+        npm install
+
+Step 5: Make sure MongoDB is running
+        (on Windows it runs automatically after install)
+
+Step 6: Create demo accounts
+        npm run seed
+
+Step 7: Start the application
+        npm start
+
+Step 8: Browser opens automatically at http://localhost:3000
+```
+
+**If browser does not open:** manually type http://localhost:3000 in Chrome or Firefox.
+
+**If you get "port in use" error:** close any other Node.js apps or change PORT=3001 in the .env file.
+
+**If MongoDB connection fails:** make sure MongoDB service is running (check Windows Services or run `mongod` in terminal).
 
 ---
 
